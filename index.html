@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNSP scrum meet - Scrum Meeting Dashboard</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-layer-group brand-icon"></i>
+                <span class="brand-text">MNSP scrum meet</span>
+            </div>
+
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="menu-item active" data-view="dashboard">
+                        <a href="#">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-view="team">
+                        <a href="#">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Team Members</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-view="scrum-board">
+                        <a href="#">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>Scrum Board</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-view="updates">
+                        <a href="#">
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <span>Daily Updates</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-view="blockers">
+                        <a href="#">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span>Blockers</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" data-view="burndown">
+                        <a href="#">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Burndown Chart</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=3b82f6&color=fff" alt="User">
+                    <div class="user-info">
+                        <span class="name">Scrum Master</span>
+                        <span class="role">Admin</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="main-content">
+            <!-- TOP HEADER -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebar-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1>Sprint Alpha</h1>
+                    <span class="sprint-badge">Sprint 12</span>
+                </div>
+                <div class="header-right">
+                    <div class="date-display" id="current-date">Fetching date...</div>
+                    <button class="btn btn-icon" id="global-fullscreen-btn" title="Toggle Fullscreen">
+                        <i class="fa-solid fa-expand"></i>
+                    </button>
+                    <button class="btn btn-primary start-meeting-btn">
+                        <i class="fa-solid fa-video"></i> Start Meeting
+                    </button>
+                </div>
+            </header>
+
+            <!-- DYNAMIC VIEWS CONTAINER -->
+            <div id="views-container">
+
+                <!-- DASHBOARD VIEW -->
+                <section id="dashboard-view" class="view-section active">
+                    <div class="section-header">
+                        <h2>Dashboard Overview</h2>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card" id="stat-total">
+                            <div class="icon-box blue"><i class="fa-solid fa-clipboard-list"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Tasks</h3>
+                                <p class="value">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" id="stat-completed">
+                            <div class="icon-box green"><i class="fa-solid fa-check-circle"></i></div>
+                            <div class="stat-info">
+                                <h3>Completed</h3>
+                                <p class="value">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" id="stat-progress">
+                            <div class="icon-box orange"><i class="fa-solid fa-spinner"></i></div>
+                            <div class="stat-info">
+                                <h3>In Progress</h3>
+                                <p class="value">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" id="stat-blocked">
+                            <div class="icon-box red"><i class="fa-solid fa-ban"></i></div>
+                            <div class="stat-info">
+                                <h3>Blocked</h3>
+                                <p class="value">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-widgets">
+                        <div class="widget">
+                            <h3><i class="fa-solid fa-bolt"></i> Recent Activity</h3>
+                            <ul class="activity-list" id="recent-activity-list">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+                        <div class="widget">
+                            <h3><i class="fa-solid fa-user-clock"></i> Team Availability</h3>
+                            <div class="team-availability-list" id="team-availability-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TEAM MEMBERS VIEW -->
+                <section id="team-view" class="view-section hidden">
+                    <div class="section-header">
+                        <h2>Team Members</h2>
+                    </div>
+                    <div class="team-grid" id="team-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- SCRUM BOARD VIEW -->
+                <section id="scrum-board-view" class="view-section hidden">
+                    <div class="section-header">
+                        <h2>Scrum Board</h2>
+                        <div class="board-controls">
+                            <input type="text" placeholder="Search tasks..." class="search-input">
+                            <button class="btn btn-secondary"><i class="fa-solid fa-plus"></i> New Task</button>
+                        </div>
+                    </div>
+                    <div class="scrum-board">
+                        <div class="column" id="col-todo" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="column-header todo">
+                                <span>To Do</span>
+                                <span class="count" id="count-todo">0</span>
+                            </div>
+                            <div class="task-list" id="list-todo">
+                                <!-- Tasks go here -->
+                            </div>
+                        </div>
+                        <div class="column" id="col-progress" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="column-header progress">
+                                <span>In Progress</span>
+                                <span class="count" id="count-progress">0</span>
+                            </div>
+                            <div class="task-list" id="list-progress">
+                                <!-- Tasks go here -->
+                            </div>
+                        </div>
+                        <div class="column" id="col-done" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="column-header done">
+                                <span>Done</span>
+                                <span class="count" id="count-done">0</span>
+                            </div>
+                            <div class="task-list" id="list-done">
+                                <!-- Tasks go here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DAILY UPDATES VIEW -->
+                <section id="updates-view" class="view-section hidden">
+                    <div class="section-header">
+                        <h2>Daily Updates</h2>
+                    </div>
+                    <div class="updates-container" id="updates-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- BLOCKERS VIEW -->
+                <section id="blockers-view" class="view-section hidden">
+                    <div class="section-header">
+                        <h2>Blockers</h2>
+                    </div>
+                    <div class="blockers-list" id="blockers-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <!-- BURNDOWN CHART VIEW -->
+                <section id="burndown-view" class="view-section hidden">
+                    <div class="section-header">
+                        <h2>Burndown Chart</h2>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="burndownCanvas"></canvas>
+                    </div>
+                </section>
+
+                <!-- MEETING ROOM VIEW -->
+                <section id="meeting-view" class="view-section hidden">
+                    <div class="meeting-container">
+                        <div class="meeting-main">
+                            <div class="video-grid" id="meeting-video-grid">
+                                <!-- Participants will be injected here -->
+                            </div>
+                            <div class="meeting-controls">
+                                <button class="control-btn" id="meeting-mic-btn"><i
+                                        class="fa-solid fa-microphone"></i></button>
+                                <button class="control-btn" id="meeting-video-btn"><i
+                                        class="fa-solid fa-video"></i></button>
+                                <button class="control-btn" id="meeting-screen-btn"><i
+                                        class="fa-solid fa-desktop"></i></button>
+                                <button class="control-btn" id="fullscreen-btn"><i
+                                        class="fa-solid fa-expand"></i></button>
+                                <button class="control-btn" id="meeting-info-btn" title="Participants & Agenda"><i
+                                        class="fa-solid fa-users"></i></button>
+                                <button class="control-btn leave-btn" id="end-meeting-btn"><i
+                                        class="fa-solid fa-phone-slash"></i> End Meeting</button>
+                            </div>
+                        </div>
+                        <aside class="meeting-sidebar">
+                            <div class="sidebar-tabs">
+                                <button class="tab-btn active">Participants</button>
+                                <button class="tab-btn">Agenda</button>
+                            </div>
+                            <div class="sidebar-content" id="meeting-participants-list">
+                                <!-- List of participants -->
+                            </div>
+                        </aside>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL FOR TEAM DETAILS -->
+    <div id="team-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <img id="modal-avatar" src="" alt="Avatar">
+                <div>
+                    <h2 id="modal-name">Name</h2>
+                    <p id="modal-role">Role</p>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="update-section">
+                    <h4><i class="fa-solid fa-clock-rotate-left"></i> Yesterday</h4>
+                    <p id="modal-yesterday">...</p>
+                </div>
+                <div class="update-section">
+                    <h4><i class="fa-solid fa-calendar-day"></i> Today</h4>
+                    <p id="modal-today">...</p>
+                </div>
+                <div class="update-section blocker">
+                    <h4><i class="fa-solid fa-ban"></i> Blockers</h4>
+                    <p id="modal-blockers">...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
