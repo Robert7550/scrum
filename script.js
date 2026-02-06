@@ -319,7 +319,7 @@ function showTasks(type) {
         color = "var(--danger-color)";
     }
 
-    const modal = document.getElementById('team-modal');
+    const modal = document.getElementById('task-modal');
     modal.querySelector('.modal-header').innerHTML = `
         <div style="background: ${color}15; color: ${color}; width: 60px; height: 60px; border-radius: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 12px ${color}20;">
             <i class="fa-solid ${icon}"></i>
@@ -384,15 +384,21 @@ window.openTeamModal = function (id) {
     modal.classList.remove('hidden');
 };
 
-document.querySelector('.close-modal').addEventListener('click', () => {
-    document.getElementById('team-modal').classList.add('hidden');
+// MODAL CLOSING LOGIC
+document.querySelectorAll('.close-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const modal = e.target.closest('.modal');
+        if (modal) modal.classList.add('hidden');
+    });
 });
 
 // Close modal on outside click
-document.getElementById('team-modal').addEventListener('click', (e) => {
-    if (e.target.id === 'team-modal') {
-        document.getElementById('team-modal').classList.add('hidden');
-    }
+document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
 });
 
 // RENDER SCRUM BOARD
