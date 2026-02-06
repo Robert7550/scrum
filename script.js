@@ -179,8 +179,20 @@ function setupNavigation() {
     if (meetingInfoBtn && meetingContainer) {
         meetingInfoBtn.addEventListener('click', () => {
             meetingContainer.classList.toggle('sidebar-open');
+            meetingInfoBtn.classList.toggle('active', meetingContainer.classList.contains('sidebar-open'));
         });
     }
+
+    // Meeting control active states
+    const toggleButtons = ['meeting-mic-btn', 'meeting-video-btn', 'meeting-screen-btn'];
+    toggleButtons.forEach((btnId) => {
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+            });
+        }
+    });
 }
 
 function startMeeting() {

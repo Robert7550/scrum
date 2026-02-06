@@ -996,6 +996,14 @@ body {
     z-index: 10;
 }
 
+.meeting-container.sidebar-open .meeting-controls {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: var(--radius);
+    border-bottom: 1px solid var(--glass-border);
+}
+
 .control-btn {
     width: 3.5rem;
     height: 3.5rem;
@@ -1015,6 +1023,12 @@ body {
     background: var(--primary-color);
     color: white;
     transform: translateY(-2px);
+}
+
+.control-btn.active {
+    background: var(--primary-dark);
+    color: white;
+    box-shadow: 0 8px 18px rgba(79, 70, 229, 0.35);
 }
 
 .control-btn.leave-btn {
